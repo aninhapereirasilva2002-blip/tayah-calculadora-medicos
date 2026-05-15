@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tayah-red: #8A2A2B;
+  --tayah-black: #0A0A0A;
+  --tayah-white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--tayah-white);
+  color: var(--tayah-black);
+  font-family: var(--font-lato), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background-color: var(--tayah-red);
+  color: var(--tayah-white);
+}
+
+@layer components {
+  .container-tayah {
+    @apply mx-auto w-full max-w-6xl px-6 md:px-10;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-tayah-red px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-white transition-all duration-300 hover:bg-tayah-red-dark hover:translate-y-[-1px] focus:outline-none focus:ring-2 focus:ring-tayah-red focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-tayah-white/30 bg-transparent px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-white transition-all duration-300 hover:border-tayah-white hover:bg-tayah-white/5;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-widest text-tayah-red;
+  }
+}
