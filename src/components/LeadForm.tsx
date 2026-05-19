@@ -107,7 +107,7 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
       />
 
       <Campo
-        label="Email"
+        label="E-mail"
         type="email"
         required
         erro={erros.email}
@@ -138,14 +138,14 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
         helper="Opcional · ajuda a equipe a contextualizar o retorno."
       />
 
-      <label className="flex cursor-pointer items-start gap-3 border border-tayah-gray-200 bg-white p-4 transition-colors hover:border-tayah-red/40">
+      <label className="flex cursor-pointer items-start gap-3 rounded-md border-2 border-tayah-border-card bg-tayah-white p-4 transition-colors hover:border-tayah-red/40">
         <input
           type="checkbox"
           checked={aceiteLgpd}
           onChange={(e) => setAceite(e.target.checked)}
           className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-tayah-red"
         />
-        <span className="font-sans text-xs leading-relaxed text-tayah-gray-700">
+        <span className="font-sans text-xs leading-relaxed text-tayah-text-muted">
           Autorizo o tratamento dos meus dados pela Tayah Advogados para
           contato sobre este diagnóstico, conforme a{" "}
           <Link
@@ -165,7 +165,7 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
       {erroGlobal && (
         <div
           role="alert"
-          className="border border-tayah-red bg-tayah-red/5 p-4 font-sans text-sm text-tayah-red"
+          className="rounded-md border border-tayah-red bg-tayah-cream-deep p-4 font-sans text-sm text-tayah-red"
         >
           {erroGlobal}
         </div>
@@ -174,13 +174,19 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
       <button
         type="submit"
         disabled={enviando}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-tayah-red px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-tayah-red-dark hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:bg-tayah-gray-300 disabled:text-tayah-gray-700 disabled:hover:translate-y-0"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-tayah-red py-[18px] px-7 font-sans text-base font-semibold text-tayah-white transition-all duration-300 hover:bg-tayah-red-dark hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:bg-tayah-border-card disabled:text-tayah-text-muted disabled:hover:translate-y-0"
       >
-        {enviando ? "Enviando…" : "Receber análise completa"}
-        {!enviando && <span aria-hidden>→</span>}
+        {enviando ? (
+          "Enviando…"
+        ) : (
+          <>
+            <span aria-hidden>📱</span>
+            Quero falar com a equipe Tayah
+          </>
+        )}
       </button>
 
-      <p className="font-sans text-[11px] leading-relaxed text-tayah-gray-700">
+      <p className="font-sans text-[11px] leading-relaxed text-tayah-text-muted">
         Seus dados ficam confidenciais e são tratados apenas pela equipe
         jurídica da Tayah Advogados. Você pode solicitar exclusão a qualquer
         momento via dpo@tayah.com.br.
@@ -214,10 +220,9 @@ function Campo({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 flex items-center justify-between">
-        <span className="font-sans text-xs uppercase tracking-widest text-tayah-gray-700">
-          {label}{" "}
-          {required && <span className="text-tayah-red">*</span>}
+      <span className="mb-2 flex items-center">
+        <span className="font-sans text-xs font-semibold uppercase tracking-widest text-tayah-text-muted">
+          {label} {required && <span className="text-tayah-red">*</span>}
         </span>
       </span>
       <input
@@ -227,16 +232,18 @@ function Campo({
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className={`w-full border bg-white px-4 py-3 font-sans text-base text-tayah-black placeholder:text-tayah-gray-300 focus:outline-none focus:ring-2 focus:ring-tayah-red focus:ring-offset-0 ${
+        className={`w-full rounded-md border bg-tayah-white px-4 py-3 font-sans text-base text-tayah-text-strong placeholder:text-tayah-text-muted/60 focus:outline-none focus:ring-2 focus:ring-tayah-red focus:ring-offset-0 ${
           erro
             ? "border-tayah-red"
-            : "border-tayah-gray-200 hover:border-tayah-gray-300"
+            : "border-tayah-border-card hover:border-tayah-text-muted"
         }`}
       />
       {erro ? (
         <p className="mt-1.5 font-sans text-xs text-tayah-red">{erro}</p>
       ) : helper ? (
-        <p className="mt-1.5 font-sans text-xs text-tayah-gray-700">{helper}</p>
+        <p className="mt-1.5 font-sans text-xs text-tayah-text-muted">
+          {helper}
+        </p>
       ) : null}
     </label>
   );

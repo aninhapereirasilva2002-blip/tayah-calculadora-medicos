@@ -219,6 +219,26 @@ function gerarSinalizacoes(r: RespostasCalculadora): Sinalizacao[] {
   return sin;
 }
 
+export function contarRequisitosAtendidos(r: RespostasCalculadora): number {
+  let count = 0;
+
+  const orgOK =
+    r.tipoOrganizacao === "ltda" ||
+    r.tipoOrganizacao === "slu-eireli" ||
+    r.tipoOrganizacao === "sa";
+  if (orgOK) count++;
+
+  if (temServicoHospitalar(r.servicos)) count++;
+
+  const licencaOK =
+    r.licencaSanitaria === "vigente" ||
+    r.licencaSanitaria === "renovacao" ||
+    r.licencaSanitaria === "nao-se-aplica";
+  if (licencaOK) count++;
+
+  return count;
+}
+
 export function gerarDiagnostico(r: RespostasCalculadora): Diagnostico {
   if (
     !r.tipoOrganizacao ||

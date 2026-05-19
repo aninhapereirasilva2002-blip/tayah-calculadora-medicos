@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Lato, Cormorant_Garamond } from "next/font/google";
 import CookieBanner from "@/components/CookieBanner";
 import DisclaimerLegalGlobal from "@/components/DisclaimerLegalGlobal";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import "./globals.css";
 
 const lato = Lato({
@@ -55,8 +58,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${lato.variable} ${cormorant.variable}`}>
       <body>
+        <Header />
         {children}
+        <Footer />
         <DisclaimerLegalGlobal />
+        <WhatsAppFloat />
         <CookieBanner />
       </body>
     </html>

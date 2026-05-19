@@ -8,19 +8,16 @@ interface Props {
 }
 
 export default function ProgressBar({ current, total }: Props) {
-  const pct = Math.round((current / total) * 100);
+  const pct = (current / total) * 100;
 
   return (
     <div className="w-full">
-      <div className="mb-2 flex items-center justify-between font-sans text-[11px] uppercase tracking-widest text-tayah-gray-700">
-        <span>
-          Passo {current} <span className="text-tayah-gray-300">/ {total}</span>
-        </span>
-        <span className="text-tayah-red">{pct}%</span>
-      </div>
-      <div className="h-[3px] w-full overflow-hidden bg-tayah-gray-200">
+      <p className="mb-2 font-sans text-[11px] font-semibold uppercase tracking-widest text-tayah-text-muted">
+        Passo {current} de {total}
+      </p>
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-tayah-border-soft">
         <motion.div
-          className="h-full bg-tayah-red"
+          className="h-full rounded-full bg-tayah-red"
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.4, ease: "easeOut" }}

@@ -3,9 +3,27 @@
 @tailwind utilities;
 
 :root {
+  /* Brand */
   --tayah-red: #8A2A2B;
-  --tayah-black: #0A0A0A;
+  --tayah-red-dark: #6E2122;
+  --tayah-red-light: #A8383A;
+
+  /* Backgrounds */
+  --tayah-cream: #FDF6F0;
+  --tayah-cream-deep: #FDEEE8;
   --tayah-white: #FFFFFF;
+
+  /* Texts */
+  --tayah-text-strong: #1A1A1A;
+  --tayah-text-muted: #666666;
+
+  /* Borders */
+  --tayah-border-soft: #EEE5DC;
+  --tayah-border-card: #F0E5D8;
+
+  /* Accents */
+  --tayah-green: #2E7D32;
+  --tayah-orange: #D97706;
 }
 
 html {
@@ -13,8 +31,8 @@ html {
 }
 
 body {
-  background-color: var(--tayah-white);
-  color: var(--tayah-black);
+  background-color: var(--tayah-cream);
+  color: var(--tayah-text-strong);
   font-family: var(--font-lato), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,11 +55,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-tayah-red px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-white transition-all duration-300 hover:bg-tayah-red-dark hover:translate-y-[-1px] focus:outline-none focus:ring-2 focus:ring-tayah-red focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-tayah-red px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-white transition-all duration-300 hover:bg-tayah-red-dark hover:translate-y-[-1px] focus:outline-none focus:ring-2 focus:ring-tayah-red focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-tayah-white/30 bg-transparent px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-white transition-all duration-300 hover:border-tayah-white hover:bg-tayah-white/5;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border-2 border-tayah-red bg-transparent px-7 py-4 font-sans text-sm font-semibold uppercase tracking-widest text-tayah-red transition-all duration-300 hover:bg-tayah-red hover:text-tayah-white;
   }
 
   .eyebrow {
