@@ -30,6 +30,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Safety net: previne SVG inline sem dimensão de estourar o layout */
+svg {
+  max-width: 100%;
+}
+
 body {
   background-color: var(--tayah-cream);
   color: var(--tayah-text-strong);

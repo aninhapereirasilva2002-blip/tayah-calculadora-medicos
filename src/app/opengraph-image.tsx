@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export const alt =
-  "Calculadora Tributária para Médicos · Tayah Advogados";
+  "Equiparação Hospitalar para Médicos · Pague até 70% menos de IRPJ e CSLL · Tayah Advogados";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -62,7 +62,7 @@ export default async function Image() {
             fontFamily: "sans-serif",
           }}
         >
-          Tayah Advogados · Direito Tributário Médico
+          Tayah Advogados · STJ Tema 217 · Desde 1961
         </div>
 
         {/* Título principal */}
@@ -77,9 +77,9 @@ export default async function Image() {
             letterSpacing: -2,
           }}
         >
-          <div style={{ display: "flex" }}>Calculadora Tributária</div>
+          <div style={{ display: "flex" }}>Equiparação</div>
           <div style={{ display: "flex", marginTop: 6 }}>
-            para
+            Hospitalar para
             <span style={{ color: "#8A2A2B", marginLeft: 22 }}>Médicos</span>
           </div>
         </div>
@@ -98,11 +98,11 @@ export default async function Image() {
           }}
         >
           <span>
-            Descubra em 2 minutos se sua clínica tem direito a até{" "}
+            Sua clínica pode pagar até{" "}
             <span style={{ color: "#FFFFFF", fontWeight: 700 }}>
-              70% menos IRPJ e CSLL
+              70% menos de IRPJ e CSLL
             </span>
-            .
+            . Calcule sua economia em 2 minutos.
           </span>
         </div>
 

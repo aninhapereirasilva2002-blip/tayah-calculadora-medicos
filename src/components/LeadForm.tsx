@@ -4,6 +4,12 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { z } from "zod";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const leadSchema = z.object({
   nome: z.string().trim().min(3, "Nome muito curto (mínimo 3 caracteres)."),
   email: z.string().trim().email("Email inválido."),
@@ -83,6 +89,12 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
       const json = await res.json().catch(() => ({ success: false }));
       if (!res.ok || !json.success) {
         throw new Error(json.error || "Falha ao enviar. Tente novamente.");
+      }
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "Lead", {
+          content_name: "Calculadora Equiparacao Hospitalar",
+          content_category: "Direito Tributario Medico",
+        });
       }
       onSuccess(parsed.data);
     } catch (err) {
