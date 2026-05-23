@@ -2,7 +2,7 @@ import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsApp";
 
 const HREF =
-  "https://wa.me/5521998917757?text=Ol%C3%A1%2C%20vim%20pela%20calculadora%20de%20equipara%C3%A7%C3%A3o%20hospitalar";
+  "https://wa.me/5521972473104?text=Ol%C3%A1%2C%20vim%20pela%20calculadora%20de%20equipara%C3%A7%C3%A3o%20hospitalar";
 
 export default function WhatsAppFloat() {
   return (

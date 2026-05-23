@@ -198,7 +198,7 @@ function PainelPosEnvio({
   lead: LeadData;
   diagnostico: Diagnostico;
 }) {
-  const numero = process.env.NEXT_PUBLIC_WHATSAPP_NUMERO || "5521998917757";
+  const numero = process.env.NEXT_PUBLIC_WHATSAPP_NUMERO || "5521972473104";
   const mensagem = encodeURIComponent(
     `Olá, Tayah! Sou ${lead.nome} e acabei de fazer a calculadora de equiparação hospitalar (diagnóstico ${diagnostico.nivel}). Gostaria de avançar com a análise.`
   );

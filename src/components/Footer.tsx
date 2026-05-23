@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-const WHATSAPP_NUMERO = "5521998917757";
-const WHATSAPP_DISPLAY = "(21) 99891-7757";
+const WHATSAPP_NUMERO = "5521972473104";
+const WHATSAPP_DISPLAY = "(21) 97247-3104";
 const TEL_NUMERO = "+552125447300";
 const TEL_DISPLAY = "(21) 2544-7300";
 const EMAIL = "atendimento1@tayah.com.br";

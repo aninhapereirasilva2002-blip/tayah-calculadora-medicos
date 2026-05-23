@@ -7,7 +7,7 @@ import CheckIcon from "@/components/icons/Check";
 import ScaleIcon from "@/components/icons/Scale";
 
 const WHATSAPP_HREF =
-  "https://wa.me/5521998917757?text=Ol%C3%A1%2C%20vim%20pela%20landing%20de%20equipara%C3%A7%C3%A3o%20hospitalar%20e%20quero%20agendar%20uma%20an%C3%A1lise%20gratuita";
+  "https://wa.me/5521972473104?text=Ol%C3%A1%2C%20vim%20pela%20landing%20de%20equipara%C3%A7%C3%A3o%20hospitalar%20e%20quero%20agendar%20uma%20an%C3%A1lise%20gratuita";
 
 const HERO_BULLETS = [
   "Mesma tese já reconhecida pelo STJ em recurso repetitivo (Tema 217)",
