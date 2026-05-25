@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { z } from "zod";
 
@@ -32,6 +32,7 @@ export type LeadData = z.infer<typeof leadSchema>;
 interface Props {
   onSuccess: (data: LeadData) => void;
   payloadAdicional?: Record<string, unknown>;
+  submitLabel?: ReactNode;
 }
 
 function formatarWhatsapp(valor: string): string {
@@ -43,7 +44,11 @@ function formatarWhatsapp(valor: string): string {
   return `(${num.slice(0, 2)}) ${num.slice(2, 7)}-${num.slice(7)}`;
 }
 
-export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
+export default function LeadForm({
+  onSuccess,
+  payloadAdicional,
+  submitLabel,
+}: Props) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -190,6 +195,8 @@ export default function LeadForm({ onSuccess, payloadAdicional }: Props) {
       >
         {enviando ? (
           "Enviando…"
+        ) : submitLabel ? (
+          submitLabel
         ) : (
           <>
             <span aria-hidden>📱</span>

@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import CardEconomiaPotencial from "@/components/CardEconomiaPotencial";
+import CardStatusPotencial from "@/components/CardStatusPotencial";
 import CardsResumo from "@/components/CardsResumo";
 import LeadForm, { type LeadData } from "@/components/LeadForm";
 import TabsResultado from "@/components/TabsResultado";
 import WhatsAppIcon from "@/components/icons/WhatsApp";
-import {
-  contarRequisitosAtendidos,
-  gerarDiagnostico,
-  type Diagnostico,
-} from "@/lib/diagnostico";
+import { gerarDiagnostico, type Diagnostico } from "@/lib/diagnostico";
 import {
   calcularEconomia,
   type CalculoTributario,
@@ -75,45 +72,39 @@ export default function ResultadoPage() {
         {estado.status === "sem-dados" && <SemDados />}
         {estado.status === "erro" && <ErroEstado mensagem={estado.mensagem} />}
 
-        {estado.status === "pronto" && (
-          <>
-            <BarraAcoes />
+        {estado.status === "pronto" &&
+          (enviado ? (
+            <>
+              <BarraAcoes />
 
-            <div className="mt-6">
-              <CardsResumo
-                calculo={estado.calculo}
-                nivel={estado.diagnostico.nivel}
-                requisitosAtendidos={contarRequisitosAtendidos(
-                  estado.respostas
-                )}
-              />
-            </div>
+              <div className="mt-6">
+                <CardStatusPotencial />
+              </div>
 
-            <div className="mt-6">
-              <CardEconomiaPotencial calculo={estado.calculo} />
-            </div>
+              <div className="mt-6">
+                <CardsResumo calculo={estado.calculo} />
+              </div>
 
-            <div className="mt-6">
-              <TabsResultado calculo={estado.calculo} />
-            </div>
+              <div className="mt-6">
+                <CardEconomiaPotencial calculo={estado.calculo} />
+              </div>
 
-            <div className="mt-8 print:hidden">
-              {enviado ? (
-                <PainelPosEnvio
-                  lead={enviado}
-                  diagnostico={estado.diagnostico}
-                />
-              ) : (
-                <GateLead
-                  diagnostico={estado.diagnostico}
-                  respostas={estado.respostas}
-                  calculo={estado.calculo}
-                  onSuccess={(data) => setEnviado(data)}
-                />
-              )}
-            </div>
-          </>
-        )}
+              <div className="mt-6">
+                <TabsResultado calculo={estado.calculo} />
+              </div>
+
+              <div className="mt-8 print:hidden">
+                <PainelPosEnvio lead={enviado} />
+              </div>
+            </>
+          ) : (
+            <GateCaptura
+              diagnostico={estado.diagnostico}
+              respostas={estado.respostas}
+              calculo={estado.calculo}
+              onSuccess={(data) => setEnviado(data)}
+            />
+          ))}
       </div>
     </main>
   );
@@ -147,7 +138,7 @@ function BarraAcoes() {
   );
 }
 
-function GateLead({
+function GateCaptura({
   diagnostico,
   respostas,
   calculo,
@@ -159,48 +150,61 @@ function GateLead({
   onSuccess: (data: LeadData) => void;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="rounded-2xl bg-tayah-white p-6 shadow-tayah-card md:p-10"
-    >
-      <h2 className="font-serif text-3xl text-tayah-text-strong md:text-4xl">
-        Receba a análise completa por e-mail e fale com nossa equipe
-      </h2>
-      <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-tayah-text-muted md:text-base">
-        Em até <strong className="text-tayah-text-strong">1 dia útil</strong>{" "}
-        um advogado tributarista da Tayah te retorna.
-      </p>
-
-      <div className="mt-8">
-        <LeadForm
-          onSuccess={onSuccess}
-          payloadAdicional={{
-            diagnostico: {
-              nivel: diagnostico.nivel,
-              pontuacao: diagnostico.pontuacao,
-              sinalizacoes: diagnostico.sinalizacoes,
-              respostasOriginais: respostas,
-            },
-            calculo,
-          }}
-        />
+    <div className="mx-auto w-full max-w-[720px]">
+      <div className="flex print:hidden">
+        <Link
+          href="/calculadora"
+          className="inline-flex items-center gap-2 rounded-md border-2 border-tayah-border-card bg-tayah-white px-4 py-2 font-sans text-sm font-semibold text-tayah-text-muted transition-colors hover:border-tayah-text-muted hover:text-tayah-text-strong"
+        >
+          <span aria-hidden>←</span> Refazer respostas
+        </Link>
       </div>
-    </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mt-6 rounded-2xl bg-tayah-white p-6 shadow-tayah-card md:p-10"
+      >
+        <p className="font-sans text-[11px] font-semibold uppercase tracking-[2px] text-tayah-red">
+          Diagnóstico concluído
+        </p>
+        <h1 className="mt-3 font-serif text-3xl text-tayah-text-strong md:text-4xl">
+          Seu diagnóstico está pronto!
+        </h1>
+        <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-tayah-text-muted md:text-base">
+          Preencha seus dados para ver o resultado completo e receber a análise
+          por e-mail. É gratuito e sem compromisso.
+        </p>
+
+        <div className="mt-8">
+          <LeadForm
+            onSuccess={onSuccess}
+            submitLabel={
+              <>
+                Ver meu resultado <span aria-hidden>→</span>
+              </>
+            }
+            payloadAdicional={{
+              diagnostico: {
+                nivel: diagnostico.nivel,
+                pontuacao: diagnostico.pontuacao,
+                sinalizacoes: diagnostico.sinalizacoes,
+                respostasOriginais: respostas,
+              },
+              calculo,
+            }}
+          />
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
-function PainelPosEnvio({
-  lead,
-  diagnostico,
-}: {
-  lead: LeadData;
-  diagnostico: Diagnostico;
-}) {
+function PainelPosEnvio({ lead }: { lead: LeadData }) {
   const numero = process.env.NEXT_PUBLIC_WHATSAPP_NUMERO || "5521972473104";
   const mensagem = encodeURIComponent(
-    `Olá, Tayah! Sou ${lead.nome} e acabei de fazer a calculadora de equiparação hospitalar (diagnóstico ${diagnostico.nivel}). Gostaria de avançar com a análise.`
+    `Olá, Tayah! Sou ${lead.nome} e acabei de fazer a calculadora de equiparação hospitalar. Gostaria de avançar com a análise personalizada.`
   );
   const linkWa = `https://wa.me/${numero}?text=${mensagem}`;
 
